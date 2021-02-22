@@ -73,6 +73,8 @@ contract Lottery is OwnableUpgradeable {
         uint8 _maxNumber,
         address _adminAddress
     ) public initializer {
+        require(_adminAddress != address(0));
+
         egg = _egg;
         lotteryNFT = _lottery;
         minPrice = _minPrice;
@@ -363,6 +365,7 @@ contract Lottery is OwnableUpgradeable {
 
     // Update admin address by the previous dev.
     function setAdmin(address _adminAddress) public onlyOwner {
+        require(_adminAddress != address(0));
         adminAddress = _adminAddress;
         emit SetAdmin(msg.sender, _adminAddress);
     }
