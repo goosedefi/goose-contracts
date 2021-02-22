@@ -17,7 +17,7 @@ contract LotteryNFT is ERC721, Ownable {
     constructor() public ERC721("GoldenGoose Lottery Ticket", "GLT") {}
 
     function newLotteryItem(address player, uint8[4] memory _lotteryNumbers, uint256 _amount, uint256 _issueIndex)
-        public onlyOwner
+        external onlyOwner
         returns (uint256)
     {
         _tokenIds.increment();
