@@ -72,7 +72,7 @@ contract Lottery is OwnableUpgradeable {
         uint256 _minPrice,
         uint8 _maxNumber,
         address _adminAddress
-    ) public initializer {
+    ) external initializer {
         require(_adminAddress != address(0));
 
         egg = _egg;
@@ -364,14 +364,14 @@ contract Lottery is OwnableUpgradeable {
     }
 
     // Update admin address by the previous dev.
-    function setAdmin(address _adminAddress) public onlyOwner {
+    function setAdmin(address _adminAddress) external onlyOwner {
         require(_adminAddress != address(0));
         adminAddress = _adminAddress;
         emit SetAdmin(msg.sender, _adminAddress);
     }
 
     // Withdraw without caring about rewards. EMERGENCY ONLY.
-    function adminWithdraw(uint256 _amount) public onlyAdmin {
+    function adminWithdraw(uint256 _amount) external onlyAdmin {
         egg.safeTransfer(address(msg.sender), _amount);
         emit DevWithdraw(msg.sender, _amount);
     }
