@@ -58,6 +58,10 @@ contract Lottery is OwnableUpgradeable {
     event Reset(uint256 indexed issueIndex);
     event MultiClaim(address indexed user, uint256 amount);
     event MultiBuy(address indexed user, uint256 amount);
+    event SetMinPrice(address indexed user, uint256 price);
+    event SetMaxNumber(address indexed user, uint256 number);
+    event SetAdmin(address indexed user, address indexed admin);
+    event SetAllocation(address indexed user, uint8 allocation1, uint8 allocation2, uint8 allocation3);
 
     constructor() public {
     }
@@ -360,6 +364,7 @@ contract Lottery is OwnableUpgradeable {
     // Update admin address by the previous dev.
     function setAdmin(address _adminAddress) public onlyOwner {
         adminAddress = _adminAddress;
+        emit SetAdmin(msg.sender, _adminAddress);
     }
 
     // Withdraw without caring about rewards. EMERGENCY ONLY.
@@ -371,16 +376,19 @@ contract Lottery is OwnableUpgradeable {
     // Set the minimum price for one ticket
     function setMinPrice(uint256 _price) external onlyAdmin {
         minPrice = _price;
+        emit SetMinPrice(msg.sender, _price);
     }
 
-    // Set the minimum price for one ticket
+    // Set the max number to be drawed
     function setMaxNumber(uint8 _maxNumber) external onlyAdmin {
         maxNumber = _maxNumber;
+        emit SetMaxNumber(msg.sender, _maxNumber);
     }
 
     // Set the allocation for one reward
     function setAllocation(uint8 _allcation1, uint8 _allcation2, uint8 _allcation3) external onlyAdmin {
         allocation = [_allcation1, _allcation2, _allcation3];
+        emit SetAllocation(msg.sender, _allcation1, _allcation2, _allcation3);
     }
 
 }
