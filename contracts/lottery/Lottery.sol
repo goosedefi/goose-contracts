@@ -342,7 +342,7 @@ contract Lottery is OwnableUpgradeable {
         if (matchingNumber > 1) {
             uint256 amount = lotteryNFT.getLotteryAmount(_tokenId);
             uint256 poolAmount = getTotalRewards(_issueIndex).mul(allocation[4-matchingNumber]).div(100);
-            reward = amount.mul(1e12).div(getMatchingRewardAmount(_issueIndex, matchingNumber)).mul(poolAmount);
+            reward = amount.mul(1e12).mul(poolAmount).div(getMatchingRewardAmount(_issueIndex, matchingNumber));
         }
         return reward.div(1e12);
     }
