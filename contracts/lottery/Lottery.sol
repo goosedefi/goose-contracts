@@ -231,7 +231,7 @@ contract Lottery is OwnableUpgradeable {
         uint256 totalPrice  = 0;
         for (uint i = 0; i < _numbers.length; i++) {
             _buySingleTicket(_price, _numbers[i]);
-            totalPrice.add(_price);
+            totalPrice = totalPrice.add(_price);
         }
         egg.safeTransferFrom(address(msg.sender), address(this), totalPrice);
         emit MultiBuy(msg.sender, totalPrice);
