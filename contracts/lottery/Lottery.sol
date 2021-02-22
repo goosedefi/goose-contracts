@@ -320,6 +320,7 @@ contract Lottery is OwnableUpgradeable {
     }
 
     function getMatchingRewardAmount(uint256 _issueIndex, uint256 _matchingNumber) public view returns (uint256) {
+        require(_matchingNumber >= 2 && _matchingNumber <= 4, "getMatchingRewardAmount: INVALID");
         return historyAmount[_issueIndex][5 - _matchingNumber];
     }
 
